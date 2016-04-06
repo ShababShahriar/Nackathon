@@ -23,12 +23,34 @@ class SpotModel extends CI_Model
 		return $query['id'];
 	}
 	
+	public function getAllSpots()
+	{
+		$sql = 'SELECT * FROM `spot`';
+		$query = $this->db->query($sql)->result_array();
+		return $query;
+	}
+	
+	public function getCategoryName($spotId)
+	{
+		$sql = 'SELECT cat FROM category WHERE `id` = `spot`.`id` and `spot`.`id` = ?';
+		$query= $this->db->query($sql,$spotId)->row_array();
+		return $query['cat'];
+	}
+	
+	public function getSpotInfo($spotId)
+	{
+		$sql = 'SELECT * FROM `spot` WHERE `id` = ?';
+		$query = $this->db->query($sql,array($spotId))->row_array();
+		return $query;
+	}
+	
 	public function insertSpot($spotData)
 	{
-		$sql = 'INSERT INTO `spot`(`name`, `locationId`, `howToGo`, `security`, `estimatedCost`, `food`, `policeContact`, `fireContact`, `checked`)
-				VALUES (?,?,?,?,?,?,?,?,?)';
+		
+		$sql = 'INSERT INTO `spot`(`name`, `locationId`, `howToGo`, `security`, `estimatedCost`, `food`, `policeContact`, `fireContact`, `checked`,`categoryId`)
+				VALUES (?,?,?,?,?,?,?,?,?,?)';
 		$query = $this->db->query($sql,array($spotData['spotName'],$spotData['locationId'],$spotData['howToGo'],$spotData['security'],$spotData['estimatedCost'],$spotData['food'],$spotData['policeContact'],
-				$spotData['fireContact'],$spotData['checked']));
+				$spotData['fireContact'],$spotData['checked'],$spotData['category']));
 		
 		
 		$sql = 'SELECT `id` FROM `spot` WHERE `name` = ? AND `locationId` = ?';

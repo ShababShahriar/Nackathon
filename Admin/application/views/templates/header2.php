@@ -10,14 +10,19 @@
     <link rel="icon" href="../../favicon.ico">
     <link rel="stylesheet" href="<?php echo base_url("assets/css/home.css"); ?>">
     <link rel="stylesheet" href="<?php echo base_url("assets/css/button.css"); ?>">
-    <title>UnderConstruction - Admin</title>
+
+    <title>TourBangla - Admin</title>
 
     <!-- Bootstrap core CSS -->
-     
     <link href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" rel="stylesheet">
     <link href="<?php echo base_url("assets/css/dashboard.css"); ?>" rel="stylesheet">
     <script src="<?php echo base_url("assets/js/ie-emulation-modes-warning.js"); ?>"></script>
     <link href="<?php echo base_url("assets/css/mynavbar.css"); ?>" rel="stylesheet">
+    
+    <link href="<?php echo base_url("assets/css/fileinput.css"); ?>" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link href="<?php echo base_url("assets/css/myMap.css"); ?>" rel="stylesheet">
+     <script src="<?php echo base_url("assets/js/myMap.js"); ?>"></script>
   </head>
 
   <body>
@@ -31,15 +36,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a id="logo" class="navbar-brand" href="">UnderConstruction</a>
+          <a id="logo" class="navbar-brand" href="">TourBangla</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?php echo site_url('admin'); ?>" class="glyphicon glyphicon-home"> Home</a></li>
-            <li><a href="<?php echo site_url('start/settings');?>">Settings</a></li>
-            <li><a href="<?php echo site_url('start/profile');?>">Profile</a></li>
-            <li><a href="<?php echo site_url('admin/showBarGraph');?>">Show Bar Graph</a></li>
-            <li><a href="<?php echo site_url('admin/logout'); ?>" class="glyphicon glyphicon-log-out"> LogOut</a></li>
+            <li><a href="<?php echo site_url('admin'); ?>" > <strong>Home</strong></a></li>
+            <li><a href="<?php echo site_url('admin/addNewSpot');?>"><b>Add New Spot</b></a></li>
+            <li><a href="<?php echo site_url('admin/addNewAgency');?>"><b>Add New Agency</b></a></li>
+            <li><a href="<?php echo site_url('admin/editInfo');?>"><b>Edit Existing Resource</b></a></li>
+            <li><a href="<?php echo site_url('admin/approveSpot');?>"><b>Approve Pending Inserts</b></a></li>
+            <li><a href="<?php echo site_url('admin/settings');?>"><b>Settings</b></a></li>
+            <li><a href="<?php echo site_url('admin/logout'); ?>" ><b>LogOut</b></a></li>
           </ul>
           
         </div>

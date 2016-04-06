@@ -17,6 +17,8 @@ class Home extends CI_Controller {
 		define ("SPOT",3);
 		//load models
 		$this->load->model('spotModel');
+		$this->load->model('staticModel');
+		$this->load->model('categoryModel');
 	}
 	 
 	public function index()
@@ -32,11 +34,13 @@ class Home extends CI_Controller {
 		$data['googleId'] = $_POST['googleId'];
 		$data['lat'] = $_POST['latitude'];
 		$data['lon'] = $_POST['longitude'];
-		$data['roadNo'] = $_POST['roadNo'];
-		$data['district'] = $_POST['district'];
+		$data['roadNo'] = trim($_POST['roadNo']);
+		$data['district'] = trim($_POST['district']);
 		
 		
 		$spotData['locationId'] = $this->spotModel->insertLocation($data);
+		
+		$spotData['category'] = $_POST['category'];
 		
 		
 		//insert a spot and get spotId
@@ -65,6 +69,48 @@ class Home extends CI_Controller {
 		$jsonData['status'] = "OK";
 		echo json_encode($jsonData);
 	}
+	
+	public function getSearchPopulationData()
+	{
+		$jsonData = array();
+		$spots = array();
+		
+		$temp = $this->spotModel->getAllSpots();
+		foreach($temp as $t)
+		{
+			$spot = array();
+			$spot['name'] = $t['name'];
+			$spot['id'] = $t['id'];
+			array_push($spots,$spot);
+		}
+		$jsonData['spots'] = $spots;
+		
+		
+		$temp = $this->categoryModel->getAllCategory();
+		$cats = array();
+		
+		foreach($temp as $t)
+		{
+			array_push($cats,$t['cat']);
+		}
+		$jsonData['categories'] = $cats;
+		
+		echo json_encode($jsonData);
+	}
+	
+	/**
+	public function getSpotData()
+	{
+		$name = 
+		$howToGo = 
+		$images = 
+		$estimatedCost = 
+		$policeContact = 
+		$fireContact = 
+		$cat = 
+		$location = 
+	}
+	*/
 	
 	public function login()	
 	{
