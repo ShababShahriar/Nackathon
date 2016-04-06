@@ -41,6 +41,11 @@ class Admin extends CI_Controller {
 	
 	public function index()			
 	{
+		$this->load->view("adminHome");
+	}
+	
+	public function newUserPosts()
+	{
 		$spots = array();
 		
 		$temp = $this->adminModel->getNewSpotsFromUser();
