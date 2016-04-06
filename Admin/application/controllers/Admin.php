@@ -28,6 +28,8 @@ class Admin extends CI_Controller {
 		}
 		  
 		//load models
+		$this->load->model('adminModel');
+		$this->load->model('spotModel');
 		
 		$this->load->view('templates/header2');
      }
@@ -38,8 +40,33 @@ class Admin extends CI_Controller {
 	
 	public function index()			
 	{
-		echo "Hello".$_SESSION['adminName'];
-		//redirect('admin/search','refresh');
+		$spots = array();
+		
+		$temp = $this->adminModel->getNewSpotsFromUser();
+		foreach($temp as $t)
+		{
+			$spot = array();
+			//print_r($t);
+			$spot['spotName'] = $t['name'];
+			
+			$location = $this->spotModel->getLocationInfo($t['id']);
+			$spot['location'] = $location;
+			$spot['howToGo'] = $t['howToGo'];
+			$spot['security'] = $t['security'];
+			$spot['estimatedCost'] = $t['estimatedCost'];
+			$spot['food'] = $t['food'];
+			$spot['policeContact'] = $t['policeContact'];
+			$spot['fireContact'] = $t['fireContact'];
+			
+			$spot['images'] = $this->spotModel->getImage($t['id']);
+			$spot['description'] = $this->spotModel->getDescription($t['id']);
+			
+			array_push($spots,$spot);
+			print_r($spot);
+			
+			echo '';
+			
+		}
 	}
 	
 	/**
