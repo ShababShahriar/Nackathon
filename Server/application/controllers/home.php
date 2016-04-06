@@ -12,13 +12,58 @@ class Home extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->helper('html');
 		$this->load->library('form_validation');
-		  
+		
+
+		define ("SPOT",3);
 		//load models
+		$this->load->model('spotModel');
 	}
 	 
 	public function index()
 	{
 		
+	}
+	
+	public function addSpotFromUser()
+	{
+		$userId = $_POST['userId'];
+		
+		//Firstly , insert a location and get the id
+		$data['googleId'] = $_POST['googleId'];
+		$data['lat'] = $_POST['latitude'];
+		$data['lon'] = $_POST['longitude'];
+		$data['roadNo'] = $_POST['roadNo'];
+		$data['district'] = $_POST['district'];
+		
+		
+		$spotData['locationId'] = $this->spotModel->insertLocation($data);
+		
+		
+		//insert a spot and get spotId
+		$spotData['spotName'] = $_POST['name'];
+		$spotData['userId'] = $userId;
+		$spotData['howToGo'] = $_POST['howToGo'];
+		$spotData['security'] = $_POST['security'];
+		$spotData['estimatedCost'] = $_POST['estimatedCost'];
+		$spotData['food'] = $_POST['food'];
+		$spotData['policeContact'] = $_POST['policeContact'];
+		$spotData['fireContact'] = $_POST['fireContact'];
+		$spotData['checked'] = 0;
+		$spotId = $this->spotModel->insertSpot($spotData);
+		
+		
+		//insert description
+		$descriptionData['text'] = $_POST['description'];
+		$descriptionData['userId'] = $userId;
+		$descriptionData['type'] = SPOT;
+		$descriptionData['entityId'] = $spotId;
+		$descriptionData['time'] = $this->spotModel->currentTime();
+		$this->spotModel->insertSpotDescription($descriptionData);
+		
+		
+		//$jsonData = array();
+		$jsonData['status'] = "OK";
+		echo json_encode($jsonData);
 	}
 	
 	public function login()	
@@ -35,6 +80,8 @@ class Home extends CI_Controller {
 		$jsonData['isVerified'] = $data['isVerified'];
 		echo json_encode($jsonData);
 	}
+	
+	
 	
 	//
 	//working ...
