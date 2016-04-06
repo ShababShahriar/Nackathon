@@ -39,7 +39,7 @@
             <li><a href="<?php echo site_url('start/settings');?>">Settings</a></li>
             <li><a href="<?php echo site_url('start/profile');?>">Profile</a></li>
             <li><a href="<?php echo site_url('admin/showBarGraph');?>">Show Bar Graph</a></li>
-            <li><a href="<?php echo site_url('admin/logout'); ?>" class="glyphicon glyphicon-log-out"> LogOut</a></li>
+            <li><a href="<?php echo site_url('agency/logout'); ?>" class="glyphicon glyphicon-log-out"> LogOut</a></li>
           </ul>
           
         </div>

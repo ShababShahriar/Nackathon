@@ -17,6 +17,8 @@ class Home extends CI_Controller {
 		  
 		  // <Load Admin Model>
 		  $this->load->model('agencyModel');
+		  
+		
      }
 	 
 	public function index()
@@ -24,7 +26,7 @@ class Home extends CI_Controller {
 		
 		if(isset($_SESSION["agencyName"]))
 		{
-			redirect('/admin', 'refresh');
+			redirect('/agency', 'refresh');
 		}
 		else
 		{
@@ -71,4 +73,5 @@ class Home extends CI_Controller {
 		}
 		
 	}
+	
 }
