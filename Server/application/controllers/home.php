@@ -57,7 +57,7 @@ class Home extends CI_Controller {
 		$descriptionData['userId'] = $userId;
 		$descriptionData['type'] = SPOT;
 		$descriptionData['entityId'] = $spotId;
-		$descriptionData['time'] = $this->spotModel->currentTime();
+		$descriptionData['time'] = $this->staticModel->currentTime();
 		$this->spotModel->insertSpotDescription($descriptionData);
 		
 		

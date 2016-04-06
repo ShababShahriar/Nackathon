@@ -1,13 +1,6 @@
 <?php
 class SpotModel extends CI_Model 
 {
-	/**
-		STATUS:
-			0 -> PENDING
-			1 -> VERIFIED
-			2 -> REJECTED
-			3 -> SOLVED
-	*/
 	public function __construct()	
 	{
         $this->load->database();
@@ -43,7 +36,7 @@ class SpotModel extends CI_Model
 		return $query['id'];
 		
 	}
-	
+	/**
 	public function currentTime()
 	{
 		$sql="SELECT current_timestamp() as curTime";
@@ -52,7 +45,7 @@ class SpotModel extends CI_Model
 		
 		return $result['curTime'];
 	}
-	
+	*/
 	public function insertSpotDescription($descriptionData)
 	{
 		$sql = 'INSERT INTO `description`(`userId`, `type`, `entityId`, `text`, `time`) VALUES(?,?,?,?,?)';
