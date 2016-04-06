@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2016 at 08:16 PM
+-- Generation Time: Apr 06, 2016 at 10:43 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -176,9 +176,20 @@ CREATE TABLE IF NOT EXISTS `agency_spot` (
 
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL,
-  `spotId` int(11) NOT NULL,
-  `cat` int(11) NOT NULL COMMENT '0: mountains, 1: waterfall, 2: forest, 3: lake, 4: sea beach'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cat` varchar(512) DEFAULT NULL COMMENT '0: mountains, 1: waterfall, 2: forest, 3: lake, 4: sea beach'
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `cat`) VALUES
+(1, 'Mountain'),
+(2, 'Waterfall'),
+(3, 'Sea Beach'),
+(4, 'Zoo'),
+(5, 'Park'),
+(6, 'Forest');
 
 -- --------------------------------------------------------
 
@@ -206,14 +217,15 @@ CREATE TABLE IF NOT EXISTS `description` (
   `entityId` int(11) NOT NULL,
   `text` varchar(1023) DEFAULT NULL,
   `time` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `description`
 --
 
 INSERT INTO `description` (`id`, `userId`, `type`, `entityId`, `text`, `time`) VALUES
-(1, 1, 3, 5, '', '2016-04-06 21:43:11');
+(1, 1, 3, 5, '', '2016-04-06 21:43:11'),
+(2, 1, 3, 18, '', '2016-04-07 02:14:49');
 
 -- --------------------------------------------------------
 
@@ -325,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `roadNo` varchar(127) DEFAULT NULL,
   `district` varchar(127) DEFAULT NULL,
   `division` varchar(127) DEFAULT NULL COMMENT 'unused'
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `location`
@@ -347,7 +359,14 @@ INSERT INTO `location` (`id`, `googleId`, `latitude`, `longitude`, `name`, `road
 (13, 'ChIJlQUFI0qzVTcRA8df4b3kLek', 23.646094799999997, 90.5991042, NULL, 'Sonargaon', 'Narayangonj', 'Dhaka'),
 (14, 'ChIJc7WDb4NiqjARcWSRhOx_HgM', 21.8031005, 90.1822792, NULL, 'Kuakata Sea Beach', ' Barisal', 'Barisal'),
 (15, 'ChIJwyi5KurHrTAREAiXaAqeUzs', 21.439463599999996, 92.0077316, NULL, 'Cox''s Bazar', ' Cox''s Bazar', 'Chittagong'),
-(16, 'ChIJ12azfWMR_DkR08aUGW7I9gE', 24.420115600000003, 88.9911879, NULL, 'Natore', 'Natore', 'Rajshahi');
+(16, 'ChIJ12azfWMR_DkR08aUGW7I9gE', 24.420115600000003, 88.9911879, NULL, 'Natore', 'Natore', 'Rajshahi'),
+(17, 'ChIJKWAwGkS4VTcRWbNuv9-3S1w', 23.732019100000002, 90.4259218, NULL, 'Kamlapur', ' Dhaka', NULL),
+(18, 'ChIJj5VI6LC4VTcRzqPGgDEubtU', 23.749423099999998, 90.3830754, NULL, 'Kalabagan', ' Dhaka', NULL),
+(19, 'ChIJJ_p5P5i4VTcRL7w40HP92u0', 23.7516264, 90.394261, NULL, 'Karwan Bazar', ' Dhaka', NULL),
+(20, 'ChIJbcTe_ca4VTcRoHNdyQMNk1Y', 23.7367689, 90.3871961, NULL, 'Katabon', ' Dhaka', NULL),
+(21, 'ChIJ-wDSYr-4VTcR15Ckg4OXF50', 23.7392698, 90.3909492, NULL, 'Ramna', ' Dhaka', NULL),
+(22, 'ChIJv6p7MIoZ6zkR6rGN8Rt8E7U', 27.717245300000002, 85.3239605, NULL, 'Kathmandu 44600', ' Nepal', NULL),
+(23, 'ChIJ0X86v0i_VTcRLDYgGbHmJNs', 23.743791899999998, 90.3665236, NULL, 'Rd No 8A', ' Dhaka 1209', NULL);
 
 -- --------------------------------------------------------
 
@@ -394,27 +413,33 @@ CREATE TABLE IF NOT EXISTS `spot` (
   `food` varchar(1023) DEFAULT NULL,
   `policeContact` varchar(2048) DEFAULT NULL,
   `fireContact` varchar(2048) DEFAULT NULL,
+  `categoryId` int(11) DEFAULT NULL,
   `checked` int(11) DEFAULT '0' COMMENT 'The spot is entered by user. Did admin check?'
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `spot`
 --
 
-INSERT INTO `spot` (`id`, `name`, `locationId`, `howToGo`, `security`, `estimatedCost`, `food`, `policeContact`, `fireContact`, `checked`) VALUES
-(1, 'Hazaribagh Gym', 4, 'Take a rickshaw.', 'Beware of pick pockets. Some cases had been reported where unsuspecting people were robbed of their belongings.', '30', 'Beauty''r lacchi, Nanna''r biryani', '017777777777', '018888888888', 0),
-(2, 'Azimpur Girls'' School and College', 6, 'Take a bus to New Market. Then take a rickshaw from there. Some buses may also go directly to Azimpur bus stand.', 'Mugging on the rise.', '10', '', '01989898989', '01876543210', 0),
-(3, 'Hazaribag Thana', 7, 'Take a rickshaw.', '', '', 'Some local biryani houses are located in the vicinity. However they do charge more than the fair price so be sure to check the menu before ordering a dish.', '01768273423', '01657236874', 0),
-(4, 'Hatir Jheel', 5, 'Buses are available going up and down Pragati Sarani. ', 'Usually safe at daytime and evening. However don''t stay late into the night.', '20', '', '01983718288', '01988099399', 0),
-(5, 'Hazaribag', 8, '', '', '', '', '', '', 0),
-(6, 'Chittagong Port', 9, 'Take Bus No. 10 which stops just in front of the port gate ', '', '10', '', '0167890765', '0197865432', 0),
-(7, 'Chittagong Port Authority', 10, '', '', '', '', '', '', 0),
-(8, 'Nafakhum Falls', 11, '', '', '', '', '', '', 0),
-(9, 'Hum Hum Waterfall', 12, 'Hire a jeep to take you directly to the entrance of Rajkandi Reserve Forest', 'Get out of the forest before night falls!', '2000 per person', 'There is a single shop at the waterfall location. Take enough drinking water with you.', '0176543876', '0176589789', 0),
-(10, 'Sonargaon', 13, '', '', '', '', '', '', 0),
-(11, 'Kuakata Sea Beach', 14, '', '', '', '', '', '', 0),
-(12, 'Cox''s Bazar', 15, '', '', '', '', '', '', 0),
-(13, 'Natore Royal Palace', 16, '', '', '', '', '', '', 0);
+INSERT INTO `spot` (`id`, `name`, `locationId`, `howToGo`, `security`, `estimatedCost`, `food`, `policeContact`, `fireContact`, `categoryId`, `checked`) VALUES
+(1, 'Hazaribagh Gym', 4, 'Take a rickshaw.', 'Beware of pick pockets. Some cases had been reported where unsuspecting people were robbed of their belongings.', '30', 'Beauty''r lacchi, Nanna''r biryani', '017777777777', '018888888888', NULL, 0),
+(2, 'Azimpur Girls'' School and College', 6, 'Take a bus to New Market. Then take a rickshaw from there. Some buses may also go directly to Azimpur bus stand.', 'Mugging on the rise.', '10', '', '01989898989', '01876543210', NULL, 0),
+(3, 'Hazaribag Thana', 7, 'Take a rickshaw.', '', '', 'Some local biryani houses are located in the vicinity. However they do charge more than the fair price so be sure to check the menu before ordering a dish.', '01768273423', '01657236874', NULL, 0),
+(4, 'Hatir Jheel', 5, 'Buses are available going up and down Pragati Sarani. ', 'Usually safe at daytime and evening. However don''t stay late into the night.', '20', '', '01983718288', '01988099399', NULL, 0),
+(5, 'Hazaribag', 8, '', '', '', '', '', '', NULL, 0),
+(6, 'Chittagong Port', 9, 'Take Bus No. 10 which stops just in front of the port gate ', '', '10', '', '0167890765', '0197865432', NULL, 0),
+(7, 'Chittagong Port Authority', 10, '', '', '', '', '', '', NULL, 0),
+(8, 'Nafakhum Falls', 11, '', '', '', '', '', '', NULL, 0),
+(9, 'Hum Hum Waterfall', 12, 'Hire a jeep to take you directly to the entrance of Rajkandi Reserve Forest', 'Get out of the forest before night falls!', '2000 per person', 'There is a single shop at the waterfall location. Take enough drinking water with you.', '0176543876', '0176589789', NULL, 0),
+(10, 'Sonargaon', 13, '', '', '', '', '', '', NULL, 0),
+(11, 'Kuakata Sea Beach', 14, '', '', '', '', '', '', NULL, 0),
+(12, 'Cox''s Bazar', 15, '', '', '', '', '', '', NULL, 0),
+(13, 'Natore Royal Palace', 16, '', '', '', '', '', '', NULL, 0),
+(14, 'Kamalapur Railway Station', 17, '', '', '', '', '', '', 1, 0),
+(15, 'Katabon', 20, '', '', '', '', '', '', 1, 0),
+(16, 'Kataban Fashion Market', 21, '', '', '', '', '', '', 1, 0),
+(17, 'Kathmandu', 22, '', '', '', '', '', '', 1, 0),
+(18, 'Rayer Bazar High School', 23, '', '', '', '', '', '', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -588,7 +613,7 @@ ALTER TABLE `security`
 -- Indexes for table `spot`
 --
 ALTER TABLE `spot`
-  ADD PRIMARY KEY (`id`), ADD KEY `securityId` (`security`(767)), ADD KEY `estimatedCostId` (`estimatedCost`(767)), ADD KEY `locationId` (`locationId`);
+  ADD PRIMARY KEY (`id`), ADD KEY `securityId` (`security`(767)), ADD KEY `estimatedCostId` (`estimatedCost`(767)), ADD KEY `locationId` (`locationId`), ADD KEY `categoryId` (`categoryId`);
 
 --
 -- Indexes for table `user`
@@ -646,7 +671,7 @@ ALTER TABLE `agency_spot`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `contact`
 --
@@ -656,7 +681,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `description`
 --
 ALTER TABLE `description`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `estimated_cost`
 --
@@ -696,7 +721,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `rating`
 --
@@ -711,7 +736,7 @@ ALTER TABLE `security`
 -- AUTO_INCREMENT for table `spot`
 --
 ALTER TABLE `spot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -799,6 +824,7 @@ ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId
 -- Constraints for table `spot`
 --
 ALTER TABLE `spot`
+ADD CONSTRAINT `cat_fk1` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`),
 ADD CONSTRAINT `spot_ibfk_4` FOREIGN KEY (`locationId`) REFERENCES `location` (`id`);
 
 --
