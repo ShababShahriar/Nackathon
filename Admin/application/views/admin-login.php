@@ -243,7 +243,7 @@ body{
 			
 			<h4>Welcome back Admin ... </h4>
           
-			<input type="text" id="userName" name="admin_name" class="form-control input-sm chat-input" placeholder="username" required/>
+			<input type="text" id="userName" name="adminName" class="form-control input-sm chat-input" placeholder="username" required/>
             </br>
             <input type="password" id="userPassword" name="password" class="form-control input-sm chat-input" placeholder="password" required/>
             </br>

@@ -22,7 +22,7 @@ class Admin extends CI_Controller {
           $this->load->helper('html');
 		  $this->load->library('form_validation');
 		  
-		if(!isset($_SESSION["admin_name"]))
+		if(!isset($_SESSION["adminName"]))
 		{
 			redirect('/home', 'refresh');
 		}
@@ -38,7 +38,8 @@ class Admin extends CI_Controller {
 	
 	public function index()			
 	{
-		redirect('admin/search','refresh');
+		echo "Hello".$_SESSION['adminName'];
+		//redirect('admin/search','refresh');
 	}
 	
 	/**

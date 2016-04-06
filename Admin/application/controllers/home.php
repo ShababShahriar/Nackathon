@@ -16,13 +16,13 @@ class Home extends CI_Controller {
 		  $this->load->library('form_validation');
 		  
 		  // <Load Admin Model>
-		  $this->load->model('admin_model');
+		  $this->load->model('adminModel');
      }
 	 
 	public function index()
 	{
 		
-		if(isset($_SESSION["admin_name"]))
+		if(isset($_SESSION["adminName"]))
 		{
 			redirect('/admin', 'refresh');
 		}
@@ -37,17 +37,17 @@ class Home extends CI_Controller {
 	
 	public function login()		
 	{
-		if(isset($_POST['admin_name']) && isset($_POST['password']))
+		if(isset($_POST['adminName']) && isset($_POST['password']))
 		{
-			$data = array('admin_name'=>trim($_POST['admin_name']),'password'=>md5($_POST["password"]));
+			$data = array('adminName'=>trim($_POST['adminName']),'password'=>md5($_POST["password"]));
 			
-			$query= $this->admin_model->get_loginInfo($data);
+			$query= $this->adminModel->getLoginInfo($data);
 			
 			
 			if($query->num_rows()==1)
 			{
 				$loginInfo=$query->row_array();
-				$_SESSION["admin_name"]=$loginInfo['admin_name'];
+				$_SESSION["adminName"]=$loginInfo['userName'];
 				
 				//Load User Admin Page
 				redirect('/admin', 'refresh');
