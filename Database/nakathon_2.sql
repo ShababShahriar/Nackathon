@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2016 at 04:52 PM
+-- Generation Time: Apr 06, 2016 at 08:16 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -19,6 +19,59 @@ SET time_zone = "+00:00";
 --
 -- Database: `nakathon_2`
 --
+
+DELIMITER $$
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `findDowncount`(`typ` INT, `id` INT) RETURNS double
+begin
+	declare totCount int default 0;
+    
+	select count(rate) into totCount
+    from rating
+    where (type=typ) and entityId=id and rate=-1;
+    
+    if totCount is null then
+    	set totCount=0;
+    end if;
+    
+    return totCount;
+end$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `findRating`(`typ` INT, `id` INT) RETURNS double
+begin
+	declare totCount int default 0;
+    declare number int default 1;
+    
+	select sum(rate), count(rate) into totCount,number 
+    from rating
+    where (type=typ) and entityId=id;
+    
+    if number=0 then
+    	set totCount=0;
+    	set number=1;
+    end if;
+    
+    return totCount/number;
+end$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `findUpcount`(`typ` INT, `id` INT) RETURNS double
+begin
+	declare totCount int default 0;
+    
+	select sum(rate) into totCount 
+    from rating
+    where (type=typ) and entityId=id and rate=1;
+    
+    if totCount is null then
+    	set totCount=0;
+    end if;
+    
+    return totCount;
+end$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -153,7 +206,14 @@ CREATE TABLE IF NOT EXISTS `description` (
   `entityId` int(11) NOT NULL,
   `text` varchar(1023) DEFAULT NULL,
   `time` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `description`
+--
+
+INSERT INTO `description` (`id`, `userId`, `type`, `entityId`, `text`, `time`) VALUES
+(1, 1, 3, 5, '', '2016-04-06 21:43:11');
 
 -- --------------------------------------------------------
 
@@ -265,7 +325,29 @@ CREATE TABLE IF NOT EXISTS `location` (
   `roadNo` varchar(127) DEFAULT NULL,
   `district` varchar(127) DEFAULT NULL,
   `division` varchar(127) DEFAULT NULL COMMENT 'unused'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `location`
+--
+
+INSERT INTO `location` (`id`, `googleId`, `latitude`, `longitude`, `name`, `roadNo`, `district`, `division`) VALUES
+(1, 'ChIJY8yqpzG_VTcRy5OfS98ReQE', 23.7299355, 90.3685048, NULL, 'H.H STATE', ' Hazaribugh Bai Ln', NULL),
+(2, 'ChIJOxBMud64VTcRdKknoAgo-f4', 23.7199564, 90.38983449999999, NULL, 'Lalbagh Rd', ' Dhaka', NULL),
+(3, 'EjBIYXRraG9sYSBSb2FkLCBEaGFrYSwgRGhha2EgRGl2aXNpb24sIEJhbmdsYWRlc2g', 23.7188138, 90.42040940000001, NULL, 'Hatkhola Rd', ' Dhaka', NULL),
+(4, 'ChIJ-b1Hei2_VTcROQ4Kg4sa3r8', 23.726523099999998, 90.3728539, NULL, 'Badda Nagar', ' Dhaka', 'Dhaka'),
+(5, 'ChIJDU9Aw4PHVTcR34G82i4NrnY', 23.769423999999997, 90.41428529999999, NULL, 'Hatir Jheel', 'Dhaka', 'Dhaka'),
+(6, 'ChIJIZXkbNu4VTcR1kjR3S-vLsQ', 23.725052599999998, 90.38793199999999, NULL, 'Azimpur', ' Dhaka', 'Dhaka'),
+(7, 'ChIJxbdC3jm_VTcR-SmCwKK0aiE', 23.734727900000003, 90.3652042, NULL, 'Hazaribagh', ' Dhaka', 'Dhaka'),
+(8, 'ChIJLV9kaki_VTcRr9QQ9334-BY', 23.7360834, 90.363067, NULL, 'Hazaribag', 'Dhaka', 'Dhaka'),
+(9, 'ChIJv5X_CyXfrDARDqnced54OSU', 22.3100611, 91.80044889999999, NULL, 'Port Internal Rd', ' Chittagong', 'Chittagong'),
+(10, 'ChIJD6T8ES_frDARJAewvqeNa5o', 22.313454000000004, 91.79961899999999, NULL, 'Purbo Nimtala', 'Chittagong', 'Chittagong'),
+(11, 'ChIJ1ZdqFm55sjAR5oIH8pCiRSs', 21.7075759, 92.5259006, NULL, 'Bandarban', 'Bandarban', 'Chittagong'),
+(12, 'ChIJK_Z8gC2HUTcREK9vKQ2S190', 24.1675729, 91.9115218, NULL, 'Hum Hum Waterfall', ' Islampur', 'Sylhet'),
+(13, 'ChIJlQUFI0qzVTcRA8df4b3kLek', 23.646094799999997, 90.5991042, NULL, 'Sonargaon', 'Narayangonj', 'Dhaka'),
+(14, 'ChIJc7WDb4NiqjARcWSRhOx_HgM', 21.8031005, 90.1822792, NULL, 'Kuakata Sea Beach', ' Barisal', 'Barisal'),
+(15, 'ChIJwyi5KurHrTAREAiXaAqeUzs', 21.439463599999996, 92.0077316, NULL, 'Cox''s Bazar', ' Cox''s Bazar', 'Chittagong'),
+(16, 'ChIJ12azfWMR_DkR08aUGW7I9gE', 24.420115600000003, 88.9911879, NULL, 'Natore', 'Natore', 'Rajshahi');
 
 -- --------------------------------------------------------
 
@@ -313,7 +395,26 @@ CREATE TABLE IF NOT EXISTS `spot` (
   `policeContact` varchar(2048) DEFAULT NULL,
   `fireContact` varchar(2048) DEFAULT NULL,
   `checked` int(11) DEFAULT '0' COMMENT 'The spot is entered by user. Did admin check?'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `spot`
+--
+
+INSERT INTO `spot` (`id`, `name`, `locationId`, `howToGo`, `security`, `estimatedCost`, `food`, `policeContact`, `fireContact`, `checked`) VALUES
+(1, 'Hazaribagh Gym', 4, 'Take a rickshaw.', 'Beware of pick pockets. Some cases had been reported where unsuspecting people were robbed of their belongings.', '30', 'Beauty''r lacchi, Nanna''r biryani', '017777777777', '018888888888', 0),
+(2, 'Azimpur Girls'' School and College', 6, 'Take a bus to New Market. Then take a rickshaw from there. Some buses may also go directly to Azimpur bus stand.', 'Mugging on the rise.', '10', '', '01989898989', '01876543210', 0),
+(3, 'Hazaribag Thana', 7, 'Take a rickshaw.', '', '', 'Some local biryani houses are located in the vicinity. However they do charge more than the fair price so be sure to check the menu before ordering a dish.', '01768273423', '01657236874', 0),
+(4, 'Hatir Jheel', 5, 'Buses are available going up and down Pragati Sarani. ', 'Usually safe at daytime and evening. However don''t stay late into the night.', '20', '', '01983718288', '01988099399', 0),
+(5, 'Hazaribag', 8, '', '', '', '', '', '', 0),
+(6, 'Chittagong Port', 9, 'Take Bus No. 10 which stops just in front of the port gate ', '', '10', '', '0167890765', '0197865432', 0),
+(7, 'Chittagong Port Authority', 10, '', '', '', '', '', '', 0),
+(8, 'Nafakhum Falls', 11, '', '', '', '', '', '', 0),
+(9, 'Hum Hum Waterfall', 12, 'Hire a jeep to take you directly to the entrance of Rajkandi Reserve Forest', 'Get out of the forest before night falls!', '2000 per person', 'There is a single shop at the waterfall location. Take enough drinking water with you.', '0176543876', '0176589789', 0),
+(10, 'Sonargaon', 13, '', '', '', '', '', '', 0),
+(11, 'Kuakata Sea Beach', 14, '', '', '', '', '', '', 0),
+(12, 'Cox''s Bazar', 15, '', '', '', '', '', '', 0),
+(13, 'Natore Royal Palace', 16, '', '', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -555,7 +656,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `description`
 --
 ALTER TABLE `description`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `estimated_cost`
 --
@@ -595,7 +696,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `rating`
 --
@@ -610,7 +711,7 @@ ALTER TABLE `security`
 -- AUTO_INCREMENT for table `spot`
 --
 ALTER TABLE `spot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `user`
 --
