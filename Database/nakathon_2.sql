@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2016 at 08:26 AM
+-- Generation Time: Apr 06, 2016 at 11:25 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `nakathon`
+-- Database: `nakathon_2`
 --
 
 -- --------------------------------------------------------
@@ -46,7 +46,15 @@ CREATE TABLE IF NOT EXISTS `agency` (
   `descriptionId` int(11) DEFAULT NULL,
   `rating` double DEFAULT NULL,
   `websiteLink` varchar(1023) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `agency`
+--
+
+INSERT INTO `agency` (`id`, `email`, `agencyName`, `password`, `descriptionId`, `rating`, `websiteLink`) VALUES
+(1, NULL, 'agency1', '3bfb04fca479ac4a8d4ddd4b02868fd0', NULL, NULL, NULL),
+(2, NULL, 'agency2', '7babfa807a160064a31b52c1cb25054b', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -97,6 +105,18 @@ CREATE TABLE IF NOT EXISTS `agency_spot` (
 `id` int(11) NOT NULL,
   `agencyId` int(11) NOT NULL,
   `spotId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE IF NOT EXISTS `category` (
+`id` int(11) NOT NULL,
+  `spotId` int(11) NOT NULL,
+  `cat` int(11) NOT NULL COMMENT '0: mountains, 1: waterfall, 2: forest, 3: lake, 4: sea beach'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -369,6 +389,12 @@ ALTER TABLE `agency_spot`
  ADD PRIMARY KEY (`id`), ADD KEY `agencyId` (`agencyId`), ADD KEY `spotId` (`spotId`);
 
 --
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `contact`
 --
 ALTER TABLE `contact`
@@ -477,7 +503,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `agency`
 --
 ALTER TABLE `agency`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `agency_hotel`
 --
@@ -497,6 +523,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `agency_spot`
 --
 ALTER TABLE `agency_spot`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `contact`
