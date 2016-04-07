@@ -245,4 +245,23 @@ class Home extends CI_Controller {
 		mail("saiful_buet2011@yahoo.com","PHP Test",$msg,"From: saiful.11722@gmail.com");
 	}
 	
+	public function getSearchByDistrictData()
+	{
+		$jsonData = array();
+		$spots = array();
+		
+		$name=$_POST['$name']
+		$temp = $this->spotModel->searchByDistrict($name);
+		foreach($temp as $t)
+		{
+			$spot = array();
+			$spot['name'] = $t['name'];
+			$spot['id'] = $t['id'];
+			array_push($spots,$spot);
+		}
+		$jsonData['spots'] = $spots;
+		
+		
+		echo json_encode($jsonData);
+	}
 }

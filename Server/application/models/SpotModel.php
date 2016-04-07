@@ -76,5 +76,20 @@ class SpotModel extends CI_Model
 				$descriptionData['text'],$descriptionData['time']));
 		
 	}
+
+	public function searchByDistrict($name)
+	{
+		$sql = 'SELECT * FROM `spot` JOIN `location` ON spot.`locationId`=location.`id` WHERE LOWER(TRIM(location.`district`))=?';
+		$query = $this->db->query($sql,array(strtolower($name))->result_array();
+		return $query;
+	}
+
+	public function searchByDivision($name)
+	{
+		$sql = 'SELECT * FROM `spot` JOIN `location` ON spot.`locationId`=location.`id` WHERE LOWER(TRIM(location.`division`))=?';
+		$query = $this->db->query($sql,array(strtolower($name))->result_array();
+		return $query;
+	}
 }
+
 ?>
