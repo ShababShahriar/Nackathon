@@ -177,4 +177,14 @@ class Admin extends CI_Controller {
 			array_push($alerts,$alert);
 		}
 	}
+
+	public function getLatLon()
+	{
+
+		$this->load->view("getLat");
+	}
+	public function approvenext()
+	{
+		$this->load->view("approveNext");
+	}
 }
