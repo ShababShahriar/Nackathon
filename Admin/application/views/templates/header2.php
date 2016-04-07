@@ -41,7 +41,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="<?php echo site_url('admin'); ?>" > <strong>Home</strong></a></li>
-            <li><a href="<?php echo site_url('admin/addNewSpot');?>"><b>Add New Spot</b></a></li>
+            <li><a href="<?php echo site_url('admin/getLatLon');?>"><b>Add New Spot</b></a></li>
             <li><a href="<?php echo site_url('admin/addNewAgency');?>"><b>Add New Agency</b></a></li>
             <li><a href="<?php echo site_url('admin/editInfo');?>"><b>Edit Existing Resource</b></a></li>
             <li><a href="<?php echo site_url('admin/approveSpot');?>"><b>Approve Pending Inserts</b></a></li>
