@@ -44,6 +44,48 @@ class Admin extends CI_Controller {
 		$this->load->view("adminHome");
 	}
 	
+	public function addNewSpot()
+	{
+		$userId = $_POST['userId'];
+		
+		//Firstly , insert a location and get the id
+		$data['googleId'] = $_POST['googleId'];
+		$data['lat'] = $_POST['latitude'];
+		$data['lon'] = $_POST['longitude'];
+		$data['roadNo'] = trim($_POST['roadNo']);
+		$data['district'] = trim($_POST['district']);
+		
+		
+		$spotData['locationId'] = $this->spotModel->insertLocation($data);
+		
+		$spotData['category'] = $_POST['category'];
+		
+		
+		//insert a spot and get spotId
+		$spotData['spotName'] = $_POST['name'];
+		$spotData['userId'] = $userId;
+		$spotData['howToGo'] = $_POST['howToGo'];
+		$spotData['security'] = $_POST['security'];
+		$spotData['estimatedCost'] = $_POST['estimatedCost'];
+		$spotData['food'] = $_POST['food'];
+		$spotData['policeContact'] = $_POST['policeContact'];
+		$spotData['fireContact'] = $_POST['fireContact'];
+		$spotData['checked'] = 1;
+		$spotId = $this->spotModel->insertSpot($spotData);
+		
+		
+		//insert description
+		$descriptionData['text'] = $_POST['description'];
+		$descriptionData['userId'] = $userId;
+		$descriptionData['type'] = SPOT;
+		$descriptionData['entityId'] = $spotId;
+		$descriptionData['time'] = $this->staticModel->currentTime();
+		$this->spotModel->insertSpotDescription($descriptionData);
+		
+		$data['success']=true;
+		$this->load->view('status_message',$data);
+	}
+	
 	public function newUserPosts()
 	{
 		$spots = array();

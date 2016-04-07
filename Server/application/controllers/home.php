@@ -15,8 +15,10 @@ class Home extends CI_Controller {
 		
 
 		define ("SPOT",3);
+		define ("HOTEL",1);
 		//load models
 		$this->load->model('spotModel');
+		$this->load->model('hotelModel');
 		$this->load->model('staticModel');
 		$this->load->model('categoryModel');
 	}
@@ -63,6 +65,43 @@ class Home extends CI_Controller {
 		$descriptionData['entityId'] = $spotId;
 		$descriptionData['time'] = $this->staticModel->currentTime();
 		$this->spotModel->insertSpotDescription($descriptionData);
+		
+		
+		//$jsonData = array();
+		$jsonData['status'] = "OK";
+		echo json_encode($jsonData);
+	}
+	
+	public function addHotelFromUser()
+	{
+		$userId = $_POST['userId'];
+		
+		//Firstly , insert a location and get the id
+		$data['googleId'] = $_POST['googleId'];
+		$data['lat'] = $_POST['latitude'];
+		$data['lon'] = $_POST['longitude'];
+		
+		$data['roadNo'] = trim($_POST['roadNo']);	//Address
+		
+		//$data['district'] = trim($_POST['district']);
+		
+		
+		$hotelData['locationId'] = $this->hotelModel->insertLocation($data);
+		
+		$hotelData['name'] = $_POST['name'];
+		$hotelData['locationDescription'] = $_POST['locationDescription'];
+		//$hotelData['rating'] = NULL ;
+		$hotelData['siteLink'] = $_POST['websiteLink'];
+		
+		$hotelId = $this->hotelModel->insertHotel($hotelData);
+		
+		//insert description
+		$descriptionData['text'] = $_POST['description'];
+		$descriptionData['userId'] = $userId;
+		$descriptionData['type'] = HOTEL;
+		$descriptionData['entityId'] = $hotelId;
+		$descriptionData['time'] = $this->staticModel->currentTime();
+		$this->hotelModel->insertHotelDescription($descriptionData);
 		
 		
 		//$jsonData = array();
