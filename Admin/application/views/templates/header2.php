@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="<?php echo base_url("assets/css/home.css"); ?>">
     <link rel="stylesheet" href="<?php echo base_url("assets/css/button.css"); ?>">
 
-    <title>TourBangla - Admin</title>
+    <title>Tourtoise - Admin</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" rel="stylesheet">
@@ -36,7 +36,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a id="logo" class="navbar-brand" href="">TourBangla</a>
+          <a id="logo" class="navbar-brand" href="">TourToise</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">

@@ -105,9 +105,13 @@
                 <br>
                 <div>
                     <div class="col-md-6" ></div>
-                        <button type="Submit" class="btn btn-success">Save Edited Info</button>   
+                    <div class="col-md-3">
+                        <button type="Submit" class="btn btn-success">Save Edited Info</button>
+                    </div> 
+                        <button type="Submit" class="btn btn-danger">Discard</button>   
+
                 </div>   
-                    
+                 <br>   
             </form>
         </div>
         <div class="col-md-2"></div>
