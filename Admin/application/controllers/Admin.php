@@ -163,4 +163,18 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view("approveSpot");
 	}
+	
+	public function getAlerts()
+	{
+		$temp = $this->alertModel->getAlerts();
+		$alerts = array();
+		foreach($temp as $t)
+		{
+			$alert = array();
+			$alert['lat'] = $t['lat'];
+			$alert['long'] = $t['long'];
+			
+			array_push($alerts,$alert);
+		}
+	}
 }

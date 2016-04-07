@@ -16,16 +16,29 @@ class Home extends CI_Controller {
 
 		define ("SPOT",3);
 		define ("HOTEL",1);
+		define ("HOTEL_CONTACT",1);
 		//load models
 		$this->load->model('spotModel');
 		$this->load->model('hotelModel');
 		$this->load->model('staticModel');
 		$this->load->model('categoryModel');
+		$this->load->model('alertModel');
 	}
 	 
 	public function index()
 	{
 		
+	}
+	
+	public function insertAlert()
+	{
+		$alertData['lat'] = $_POST['latitude'];
+		$alertData['long'] = $_POST['longitude'];
+		$alertData['seen'] = 0;
+		$this->alertModel->insertAlert($alertData);
+		
+		$jsonData['status'] = "OK";
+		echo json_encode($jsonData);
 	}
 	
 	public function addSpotFromUser()
@@ -89,7 +102,7 @@ class Home extends CI_Controller {
 		$hotelData['locationId'] = $this->hotelModel->insertLocation($data);
 		
 		$hotelData['name'] = $_POST['name'];
-		$hotelData['locationDescription'] = $_POST['locationDescription'];
+		//$hotelData['locationDescription'] = $_POST['locationDescription'];
 		//$hotelData['rating'] = NULL ;
 		$hotelData['siteLink'] = $_POST['websiteLink'];
 		
@@ -101,7 +114,15 @@ class Home extends CI_Controller {
 		$descriptionData['type'] = HOTEL;
 		$descriptionData['entityId'] = $hotelId;
 		$descriptionData['time'] = $this->staticModel->currentTime();
+		
+		
 		$this->hotelModel->insertHotelDescription($descriptionData);
+		
+		//insert contact
+		$contactData['entityId']=$hotelId;
+		$contactData['details'] = $_POST['contact'];
+		$contactData['type'] = HOTEL_CONTACT;
+		$this->hotelModel->insertContact($contactData);
 		
 		
 		//$jsonData = array();

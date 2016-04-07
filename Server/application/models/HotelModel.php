@@ -8,12 +8,18 @@ class HotelModel extends CI_Model
 
 	public function insertHotel($hotelData)
 	{
-		$sql= 'INSERT INTO `hotel`(`name`, `locationId`, `locationDesc`, `websiteLink`) VALUES (?,?,?,?)';
-		$query= $this->db->query($sql,array($hotelData['name'],$hotelData['locationId'],$hotelData['locationDescription'],$hotelData['siteLink']));
+		$sql= 'INSERT INTO `hotel`(`name`, `locationId`, `websiteLink`) VALUES (?,?,?)';
+		$query= $this->db->query($sql,array($hotelData['name'],$hotelData['locationId'],$hotelData['siteLink']));
 		
 		$sql = 'SELECT `id` FROM `hotel` WHERE `name` = ? AND `locationId` = ?';
 		$query = $this->db->query($sql,array($hotelData['name'],$hotelData['locationId']))->row_array();
 		return $query['id'];
+	}
+	
+	public function insertContact($contactData)
+	{
+		$sql = 'INSERT INTO `contact`(`entityId`, `details`, `type`) VALUES (?,?,?)';
+		$query = $this->db->query($sql,array($contactData['entityId'],$contactData['details'],$contactData['type']));
 	}
 	
 	public function insertHotelDescription($descriptionData)
