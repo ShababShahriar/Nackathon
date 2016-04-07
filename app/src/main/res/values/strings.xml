@@ -22,5 +22,6 @@
     <string name="title_activity_validate_spot_description">ValidateSpotDescription</string>
     <string name="title_activity_edit_spot_description">EditSpotDescription</string>
     <string name="title_activity_add_review">AddReview</string>
+    <string name="title_activity_spot_details2">SpotDetails2</string>
 
 </resources>

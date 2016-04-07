@@ -15,6 +15,13 @@
         android:padding="10dp"
         android:textStyle="bold"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This field has been modified by others. Please validate them before editing."
+        android:textStyle="italic"
+        android:padding="10dp"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,24 +1,22 @@
 package com.tourismbangla.tourbangla;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-public class EditSpotDescription extends AppCompatActivity {
+public class add_hotel extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_spot_description);
+        setContentView(R.layout.activity_add_hotel);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_spot_description, menu);
+        getMenuInflater().inflate(R.menu.menu_add_hotel, menu);
         return true;
     }
 
@@ -36,24 +34,4 @@ public class EditSpotDescription extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-//    public void onBackButtonClick(View v) {
-//        if(v.getId() == R.id.btnSkipDescValidation) {
-//
-//        }
-//    }
-    public void onCancelButtonClick(View v) {
-        if(v.getId() == R.id.btnCancelDescEdit) {
-            Intent intent = new Intent(EditSpotDescription.this, SpotDetails2.class);
-            startActivity(intent);
-        }
-    }
-
-    public void onSubmitButtonClick(View v) {
-        if(v.getId() == R.id.btnSubmitDescEdit) {
-            Intent intent = new Intent(EditSpotDescription.this, SpotDetails2.class);
-            startActivity(intent);
-        }
-    }
-
 }

@@ -20,16 +20,18 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="submit"
-        android:id="@+id/btnSubmitDescValidation"
-        android:onClick="onSubmitButtonClick"/>
+        android:text="skip this step"
+        android:id="@+id/btnSkipDescValidation"
+        android:onClick="onSkipButtonClick"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="skip"
-        android:id="@+id/btnSkipDescValidation"
-        android:onClick="onSkipButtonClick"/>
+        android:text="submit validation"
+        android:id="@+id/btnSubmitDescValidation"
+        android:onClick="onSubmitButtonClick"/>
+
+
 
     <!--<Button-->
         <!--android:layout_width="match_parent"-->

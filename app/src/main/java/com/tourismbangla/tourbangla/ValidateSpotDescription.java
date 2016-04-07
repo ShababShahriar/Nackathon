@@ -2,6 +2,7 @@ package com.tourismbangla.tourbangla;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -64,13 +65,15 @@ public class ValidateSpotDescription extends AppCompatActivity implements EditHi
 
     public void onSubmitButtonClick(View v) {
         if(v.getId() == R.id.btnSubmitDescValidation) {
-
+            Intent intent = new Intent(ValidateSpotDescription.this, SpotDetails2.class);
+            startActivity(intent);
         }
     }
 
     public void onSkipButtonClick(View v) {
         if(v.getId() == R.id.btnSkipDescValidation) {
-
+            Intent intent = new Intent(ValidateSpotDescription.this, EditSpotDescription.class);
+            startActivity(intent);
         }
     }
 
