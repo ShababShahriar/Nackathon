@@ -1,109 +1,108 @@
 package com.tourismbangla.tourbangla;
 
-import android.app.Activity;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
+public class FoodPlaceItem {
+
+    private int hotelId;
+    private String FoodPlaceName;
+    private int locationId;
+
+    private float rating;
+    private String locationDesc;
+    private String contactNo;
+    private String email;
+    private double lat, lon;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FoodPlaceItem.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FoodPlaceItem#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FoodPlaceItem extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public FoodPlaceItem(int hotelId, String FoodPlaceName, int locationId, float rating, String locationDesc, String contactNo, String email, double lat, double lon) {
+        this.hotelId = hotelId;
+        this.FoodPlaceName = FoodPlaceName;
+        this.locationId = locationId;
+        this.rating = rating;
+        this.locationDesc = locationDesc;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+        if (contactNo == null) this.contactNo = "";
+        else this.contactNo = "Contact Number:  " + contactNo;
 
-    private OnFragmentInteractionListener mListener;
+        if (email == null) this.email = "";
+        else if(email == null && contactNo == null) this.email = "Email:  " + email;
+        else this.email = "\n" + "Email:  " + email;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FoodPlaceItem.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FoodPlaceItem newInstance(String param1, String param2) {
-        FoodPlaceItem fragment = new FoodPlaceItem();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        this.lat = lat;
+        this.lon = lon;
     }
 
-    public FoodPlaceItem() {
-        // Required empty public constructor
+
+    public String getContactNo() {
+        return contactNo;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food_place_item, container, false);
+    public String getEmail() {
+        return email;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public int getHotelId() {
+        return hotelId;
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+    public String getFoodPlaceName() {
+        return FoodPlaceName;
+    }
+
+    public void setFoodPlaceName(String foodPlaceName) {
+        this.FoodPlaceName = foodPlaceName;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public String getLocationDesc() {
+        return locationDesc;
+    }
+
+    public void setLocationDesc(String locationDesc) {
+        this.locationDesc = locationDesc;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
 }

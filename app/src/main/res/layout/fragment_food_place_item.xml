@@ -30,13 +30,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Burger Mama"
+                    android:textStyle="bold"
                     android:id="@+id/lblFoodPlaceName"
                     android:textSize="20dp"/>
 
                 <RatingBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/foodPlaceRatingBar"/>
+                    android:id="@+id/foodPlaceRatingBar"
+                    style="?android:attr/ratingBarStyleIndicator"/>
 
             </LinearLayout>
         </LinearLayout>

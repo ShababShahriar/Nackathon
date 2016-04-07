@@ -7,6 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -26,6 +32,9 @@ public class FoodPlaceFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ArrayList<FoodPlaceItem> hotelItemArrayList = new ArrayList<FoodPlaceItem>();
+    TextView hotelSpotName;
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,8 +72,11 @@ public class FoodPlaceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_food_place, container, false);
+        hotelSpotName = (TextView)v.findViewById(R.id.hotelSpotName);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food_place, container, false);
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -106,4 +118,74 @@ public class FoodPlaceFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        hotelSpotName.setText("Food Places Near ");
+        testHotelList();
+    }
+
+    private void populateHotelListView(){
+        ArrayAdapter<FoodPlaceItem> adapter = new MyListAdapter();
+
+        ListView list=(ListView)getView().findViewById(R.id.lvwFoodPlaces);
+        list.setAdapter(adapter);
+    }
+
+    private class MyListAdapter extends ArrayAdapter<FoodPlaceItem> {
+        public MyListAdapter(){
+
+            super(getActivity(), R.layout.fragment_food_place_item, hotelItemArrayList);
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            View itemView = convertView;
+            if (itemView == null) {
+                itemView = getActivity().getLayoutInflater().inflate(R.layout.fragment_food_place_item, parent, false);
+            }
+
+//            Voter curVoter = new Voter(Utility.CurrentUser.getId());
+
+
+            FoodPlaceItem currentHotel = hotelItemArrayList.get(position);
+
+
+            //fill the view
+
+            TextView hotelName = (TextView) itemView.findViewById(R.id.lblFoodPlaceName);
+            hotelName.setText(currentHotel.getFoodPlaceName());
+
+            TextView hotelAddress = (TextView) itemView.findViewById(R.id.lblFoodPlaceAddress);
+            hotelAddress.setText(currentHotel.getLocationDesc());
+
+            TextView hotelContact = (TextView) itemView.findViewById(R.id.lblFoodPlaceContact);
+            hotelContact.setText(currentHotel.getContactNo() + currentHotel.getEmail());
+
+            RatingBar hotelRating = (RatingBar) itemView.findViewById(R.id.foodPlaceRatingBar);
+            hotelRating.setRating(currentHotel.getRating());
+
+//            TextView problemType = (TextView) itemView.findViewById(R.id.lblPostProblemType);
+//            problemType.setText(Utility.HazardTags.getHazardTags()[currentPost.getCategory()]);
+
+            return itemView;
+        }
+    }
+
+    public void testHotelList() {
+        hotelItemArrayList.clear();
+
+        FoodPlaceItem h1 = new FoodPlaceItem(1, "Burger Mama", 1, ((float) 3.5), "Fast Food at the best price possible!", "0167", null, 1.1, 2.2);
+        hotelItemArrayList.add(h1);
+
+        FoodPlaceItem h2 = new FoodPlaceItem(2, "Bismillah Fast Food", 1, 3, "Great fast food", "01959", "khan@email.com", 1.1, 2.2);
+        hotelItemArrayList.add(h2);
+
+        FoodPlaceItem h3 = new FoodPlaceItem(3, "Continental Restaurant", 1, 5, "Chinese and Thai", null, "conti@email.com", 1.1, 2.2);
+        hotelItemArrayList.add(h3);
+
+        populateHotelListView();
+    }
 }
