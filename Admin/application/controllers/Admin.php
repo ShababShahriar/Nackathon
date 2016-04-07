@@ -32,7 +32,6 @@ class Admin extends CI_Controller {
 		$this->load->model('categoryModel');
 		$this->load->model('spotModel');
 		$this->load->model('alertModel');
-		
 		$this->load->view('templates/header2');
      }
 	 
@@ -146,6 +145,11 @@ class Admin extends CI_Controller {
 		$this->load->view("addAgency");
 	}
 
+	public function beforeEdit()
+	{
+		$this->load->view("beforeEdit");
+	}
+
 	public function editInfo()
 	{
 		$this->load->view("editInfos");
@@ -179,7 +183,7 @@ class Admin extends CI_Controller {
 			array_push($alerts,$alert);
 		}
 		$data['alerts'] = $alerts;
-		$this->load->view('adminHome',$data);
+		$this->load->view("adminHome",$data);
 	}
 
 	public function getLatLon()

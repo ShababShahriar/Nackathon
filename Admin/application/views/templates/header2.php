@@ -43,7 +43,7 @@
             <li><a href="<?php echo site_url('admin'); ?>" > <strong>Home</strong></a></li>
             <li><a href="<?php echo site_url('admin/getLatLon');?>"><b>Add New Spot</b></a></li>
             <li><a href="<?php echo site_url('admin/addNewAgency');?>"><b>Add New Agency</b></a></li>
-            <li><a href="<?php echo site_url('admin/editInfo');?>"><b>Edit Existing Resource</b></a></li>
+            <li><a href="<?php echo site_url('admin/beforeEdit');?>"><b>Edit Existing Resource</b></a></li>
             <li><a href="<?php echo site_url('admin/approveSpot');?>"><b>Approve Pending Inserts</b></a></li>
             <li><a href="<?php echo site_url('admin/settings');?>"><b>Settings</b></a></li>
             <li><a href="<?php echo site_url('admin/logout'); ?>" ><b>LogOut</b></a></li>

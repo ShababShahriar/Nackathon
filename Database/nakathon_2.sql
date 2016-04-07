@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2016 at 04:58 AM
+-- Generation Time: Apr 06, 2016 at 10:43 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -171,26 +171,6 @@ CREATE TABLE IF NOT EXISTS `agency_spot` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alert`
---
-
-CREATE TABLE IF NOT EXISTS `alert` (
-  `id` int(11) NOT NULL,
-  `lat` double NOT NULL,
-  `long` double NOT NULL,
-  `seen` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `alert`
---
-
-INSERT INTO `alert` (`id`, `lat`, `long`, `seen`) VALUES
-(1, 23.7257364, 90.390614, 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `category`
 --
 
@@ -222,18 +202,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `entityId` int(11) NOT NULL,
   `details` varchar(255) DEFAULT NULL COMMENT 'a single mode of contact (i.e. e-mail id or cellphone no)',
   `type` int(11) NOT NULL COMMENT '0: agency, 1: hotel, 2: guide, 3: food shop, 4: police number, 5: fire service number'
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `contact`
---
-
-INSERT INTO `contact` (`id`, `entityId`, `details`, `type`) VALUES
-(1, 1, '+880 31-713311', 1),
-(2, 2, '+880 2-9552229', 1),
-(3, 1, '+880 31-713311', 1),
-(4, 4, ' ', 1),
-(5, 5, ' ', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -248,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `description` (
   `entityId` int(11) NOT NULL,
   `text` varchar(1023) DEFAULT NULL,
   `time` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `description`
@@ -256,12 +225,7 @@ CREATE TABLE IF NOT EXISTS `description` (
 
 INSERT INTO `description` (`id`, `userId`, `type`, `entityId`, `text`, `time`) VALUES
 (1, 1, 3, 5, '', '2016-04-06 21:43:11'),
-(2, 1, 3, 18, '', '2016-04-07 02:14:49'),
-(3, 1, 1, 1, '15000 taka per day', '2016-04-07 08:14:04'),
-(4, 1, 1, 2, '1320 taka', '2016-04-07 08:22:20'),
-(5, 1, 1, 1, '12000 taka per day', '2016-04-07 08:24:22'),
-(6, 1, 1, 4, '9000', '2016-04-07 08:25:23'),
-(7, 1, 1, 5, '1200', '2016-04-07 08:27:56');
+(2, 1, 3, 18, '', '2016-04-07 02:14:49');
 
 -- --------------------------------------------------------
 
@@ -328,17 +292,7 @@ CREATE TABLE IF NOT EXISTS `hotel` (
   `locationDesc` varchar(4192) DEFAULT NULL,
   `rating` double DEFAULT '0' COMMENT 'calculate from individual entries',
   `websiteLink` varchar(1023) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `hotel`
---
-
-INSERT INTO `hotel` (`id`, `name`, `locationId`, `locationDesc`, `rating`, `websiteLink`) VALUES
-(2, 'Hotel Purbani International Ltd.', 25, NULL, 0, 'http://www.hotelpurbaniltd.com/'),
-(3, 'Hotel Agrabad', 24, NULL, 0, 'http://www.agrabadhotel.com/'),
-(4, 'Hotel Peninsula', 26, NULL, 0, ' '),
-(5, 'Panshi Hotel & Restaurant', 27, NULL, 0, ' ');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -383,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `roadNo` varchar(127) DEFAULT NULL,
   `district` varchar(127) DEFAULT NULL,
   `division` varchar(127) DEFAULT NULL COMMENT 'unused'
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `location`
@@ -412,11 +366,7 @@ INSERT INTO `location` (`id`, `googleId`, `latitude`, `longitude`, `name`, `road
 (20, 'ChIJbcTe_ca4VTcRoHNdyQMNk1Y', 23.7367689, 90.3871961, NULL, 'Katabon', ' Dhaka', NULL),
 (21, 'ChIJ-wDSYr-4VTcR15Ckg4OXF50', 23.7392698, 90.3909492, NULL, 'Ramna', ' Dhaka', NULL),
 (22, 'ChIJv6p7MIoZ6zkR6rGN8Rt8E7U', 27.717245300000002, 85.3239605, NULL, 'Kathmandu 44600', ' Nepal', NULL),
-(23, 'ChIJ0X86v0i_VTcRLDYgGbHmJNs', 23.743791899999998, 90.3665236, NULL, 'Rd No 8A', ' Dhaka 1209', NULL),
-(24, 'ChIJjTZzY7TYrDARs-U4QZulCn8', 22.326918, 91.816217, NULL, 'Agrabad Commercial Area, Chittagong, Bangladesh', NULL, NULL),
-(25, 'ChIJxZwi-1m4VTcRMuy_ErmaVpM', 23.7276743, 90.4167155, NULL, '1 Dilkusha Rd, Dhaka 1000, Bangladesh', NULL, NULL),
-(26, 'ChIJFcjKdJDYrDARxxVuvXjmwW8', 22.3578998, 91.8218744, NULL, 'GEC Circle, Chittagong, Bangladesh', NULL, NULL),
-(27, 'ChIJP-f9NZHHVTcRR6HR9DfQAho', 23.7801831, 90.42546, NULL, 'Badda, Dhaka, Bangladesh', NULL, NULL);
+(23, 'ChIJ0X86v0i_VTcRLDYgGbHmJNs', 23.743791899999998, 90.3665236, NULL, 'Rd No 8A', ' Dhaka 1209', NULL);
 
 -- --------------------------------------------------------
 
@@ -582,12 +532,6 @@ ALTER TABLE `agency_spot`
   ADD PRIMARY KEY (`id`), ADD KEY `agencyId` (`agencyId`), ADD KEY `spotId` (`spotId`);
 
 --
--- Indexes for table `alert`
---
-ALTER TABLE `alert`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
@@ -724,11 +668,6 @@ ALTER TABLE `agency_post`
 ALTER TABLE `agency_spot`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `alert`
---
-ALTER TABLE `alert`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
@@ -737,12 +676,12 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `description`
 --
 ALTER TABLE `description`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `estimated_cost`
 --
@@ -767,7 +706,7 @@ ALTER TABLE `guide_spot`
 -- AUTO_INCREMENT for table `hotel`
 --
 ALTER TABLE `hotel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `hotel_offer`
 --
@@ -782,7 +721,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `rating`
 --

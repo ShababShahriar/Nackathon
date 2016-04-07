@@ -15,30 +15,15 @@ class Home extends CI_Controller {
 		
 
 		define ("SPOT",3);
-		define ("HOTEL",1);
-		define ("HOTEL_CONTACT",1);
 		//load models
 		$this->load->model('spotModel');
-		$this->load->model('hotelModel');
 		$this->load->model('staticModel');
 		$this->load->model('categoryModel');
-		$this->load->model('alertModel');
 	}
 	 
 	public function index()
 	{
 		
-	}
-	
-	public function insertAlert()
-	{
-		$alertData['lat'] = $_POST['latitude'];
-		$alertData['long'] = $_POST['longitude'];
-		$alertData['seen'] = 0;
-		$this->alertModel->insertAlert($alertData);
-		
-		$jsonData['status'] = "OK";
-		echo json_encode($jsonData);
 	}
 	
 	public function addSpotFromUser()
@@ -78,51 +63,6 @@ class Home extends CI_Controller {
 		$descriptionData['entityId'] = $spotId;
 		$descriptionData['time'] = $this->staticModel->currentTime();
 		$this->spotModel->insertSpotDescription($descriptionData);
-		
-		
-		//$jsonData = array();
-		$jsonData['status'] = "OK";
-		echo json_encode($jsonData);
-	}
-	
-	public function addHotelFromUser()
-	{
-		$userId = $_POST['userId'];
-		
-		//Firstly , insert a location and get the id
-		$data['googleId'] = $_POST['googleId'];
-		$data['lat'] = $_POST['latitude'];
-		$data['lon'] = $_POST['longitude'];
-		
-		$data['roadNo'] = trim($_POST['roadNo']);	//Address
-		
-		//$data['district'] = trim($_POST['district']);
-		
-		
-		$hotelData['locationId'] = $this->hotelModel->insertLocation($data);
-		
-		$hotelData['name'] = $_POST['name'];
-		//$hotelData['locationDescription'] = $_POST['locationDescription'];
-		//$hotelData['rating'] = NULL ;
-		$hotelData['siteLink'] = $_POST['websiteLink'];
-		
-		$hotelId = $this->hotelModel->insertHotel($hotelData);
-		
-		//insert description
-		$descriptionData['text'] = $_POST['description'];
-		$descriptionData['userId'] = $userId;
-		$descriptionData['type'] = HOTEL;
-		$descriptionData['entityId'] = $hotelId;
-		$descriptionData['time'] = $this->staticModel->currentTime();
-		
-		
-		$this->hotelModel->insertHotelDescription($descriptionData);
-		
-		//insert contact
-		$contactData['entityId']=$hotelId;
-		$contactData['details'] = $_POST['contact'];
-		$contactData['type'] = HOTEL_CONTACT;
-		$this->hotelModel->insertContact($contactData);
 		
 		
 		//$jsonData = array();
@@ -243,71 +183,6 @@ class Home extends CI_Controller {
 	{
 		$msg = "This is a test";
 		mail("saiful_buet2011@yahoo.com","PHP Test",$msg,"From: saiful.11722@gmail.com");
-	}
-	
-	/**
-	public function getSearchByDistrictData()
-	{
-		$jsonData = array();
-		$spots = array();
-		
-		$name=$_POST['$name']
-		$temp = $this->spotModel->searchByDistrict($name);
-		foreach($temp as $t)
-		{
-			$spot = array();
-			$spot['name'] = $t['name'];
-			$spot['id'] = $t['id'];
-			array_push($spots,$spot);
-		}
-		$jsonData['spots'] = $spots;
-		
-		
-		echo json_encode($jsonData);
-	}
-	*/
-	
-	public function searchByDivision()
-	{
-		$name=$_POST['name'];
-		//$name = 'Dhaka';
-		$jsonData = array();
-		$spots = array();
-		
-		
-		$temp = $this->spotModel->searchByDivision($name);
-		
-		foreach($temp as $t)
-		{
-			$spot = array();
-			
-			$spot = array();
-			//print_r($t);
-			$spot['name'] = $t['name'];
-			$spot['id'] = $t['id'];
-			
-			$location = $this->spotModel->getLocationInfo($t['id']);
-			$spot['location'] = $location;
-			$spot['howToGo'] = $t['howToGo'];
-			$spot['security'] = $t['security'];
-			$spot['estimatedCost'] = $t['estimatedCost'];
-			$spot['food'] = $t['food'];
-			$spot['policeContact'] = $t['policeContact'];
-			$spot['fireContact'] = $t['fireContact'];
-			
-			//$spot['images'] = $this->spotModel->getImage($t['id']);
-			$spot['description'] = $this->spotModel->getDescription($t['id']);
-			$spot['category'] = $this->categoryModel->getCategoryName($t['id']);
-			
-			array_push($spots,$spot);
-			
-			
-			//array_push($spots,$spot);
-		}
-		$jsonData['spots'] = $spots;
-		
-		
-		echo json_encode($jsonData);
 	}
 	
 }
