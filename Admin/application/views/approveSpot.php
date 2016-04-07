@@ -17,12 +17,37 @@
                         <form>
                         <td></td>
                         <td>
-                            <label>Update from user 1</label>
+                            <label>Update from user 1 at time ...</label>
                         </td>
                         <td>
                             <button type="submit" class="btn btn-primary">Edit & Approve</button>
                         </td>
                     </form>
+
+                    </tr>
+                    <tr>
+                        <form>
+                        <td></td>
+                        <td>
+                            <label>Update from user 2 at time ...</label>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Edit & Approve</button>
+                        </td>
+                    </form>
+                    
+                    </tr>
+                    <tr>
+                        <form>
+                        <td></td>
+                        <td>
+                            <label>Update from user 3 at time ...</label>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Edit & Approve</button>
+                        </td>
+                    </form>
+                    
                     </tr>
                 </tbody>
             </table>
