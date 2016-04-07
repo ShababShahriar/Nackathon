@@ -61,4 +61,22 @@ class Agency extends CI_Controller {
 	{
 		echo "OK";
 	}
+
+	/**
+	neamul
+	*/
+	public function addOffer()
+	{
+		$this->load->view("addNewOffer");
+	}
+
+	public function addHotel()
+	{
+
+	}
+
+	public function settings()
+	{
+
+	}
 }
