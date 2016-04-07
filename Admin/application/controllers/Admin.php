@@ -31,6 +31,7 @@ class Admin extends CI_Controller {
 		$this->load->model('adminModel');
 		$this->load->model('categoryModel');
 		$this->load->model('spotModel');
+		$this->load->model('alertModel');
 		
 		$this->load->view('templates/header2');
      }
@@ -41,10 +42,11 @@ class Admin extends CI_Controller {
 	
 	public function index()			
 	{
-		$this->load->view("adminHome");
+		$this->getAlerts();
+		//$this->load->view("adminHome");
 	}
 	
-	public function addNewSpot()
+	public function addNewSpotLater()
 	{
 		$userId = $_POST['userId'];
 		
@@ -176,6 +178,8 @@ class Admin extends CI_Controller {
 			
 			array_push($alerts,$alert);
 		}
+		$data['alerts'] = $alerts;
+		$this->load->view('adminHome',$data);
 	}
 
 	public function getLatLon()

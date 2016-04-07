@@ -4,6 +4,7 @@ class SpotModel extends CI_Model
 	public function __construct()	
 	{
         $this->load->database();
+		define("SPOT_DESC",3);
 	}	
 
 	public function insertLocation($data)
@@ -80,14 +81,28 @@ class SpotModel extends CI_Model
 	public function searchByDistrict($name)
 	{
 		$sql = 'SELECT * FROM `spot` JOIN `location` ON spot.`locationId`=location.`id` WHERE LOWER(TRIM(location.`district`))=?';
-		$query = $this->db->query($sql,array(strtolower($name))->result_array();
+		$query = $this->db->query($sql,array(strtolower($name)))->result_array();
 		return $query;
 	}
 
 	public function searchByDivision($name)
 	{
-		$sql = 'SELECT * FROM `spot` JOIN `location` ON spot.`locationId`=location.`id` WHERE LOWER(TRIM(location.`division`))=?';
-		$query = $this->db->query($sql,array(strtolower($name))->result_array();
+		$sql = 'SELECT s.* FROM `spot` s,`location` l WHERE s.`locationId`=l.`id` AND LOWER(TRIM(l.`division`))=?';
+		$query = $this->db->query($sql,array(strtolower($name)))->result_array();
+		return $query;
+	}
+	
+	public function getLocationInfo($spotId)
+	{
+		$sql = 'SELECT l.`latitude`, l.`longitude`, l.`roadNo`, l.`district` FROM `location` l,`spot` s WHERE s.`locationId` = l.`id` and s.`id` = ?';
+		$query = $this->db->query($sql,$spotId)->row_array();
+		return $query;
+	}
+	
+	public function getDescription($spotId)
+	{
+		$sql = 'SELECT * FROM `description` WHERE `type`=? AND `entityID` = ?';
+		$query = $this->db->query($sql,array(SPOT_DESC,$spotId))->result_array();
 		return $query;
 	}
 }

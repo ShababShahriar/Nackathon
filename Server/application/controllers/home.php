@@ -245,6 +245,7 @@ class Home extends CI_Controller {
 		mail("saiful_buet2011@yahoo.com","PHP Test",$msg,"From: saiful.11722@gmail.com");
 	}
 	
+	/**
 	public function getSearchByDistrictData()
 	{
 		$jsonData = array();
@@ -264,4 +265,49 @@ class Home extends CI_Controller {
 		
 		echo json_encode($jsonData);
 	}
+	*/
+	
+	public function searchByDivision()
+	{
+		$name=$_POST['name'];
+		//$name = 'Dhaka';
+		$jsonData = array();
+		$spots = array();
+		
+		
+		$temp = $this->spotModel->searchByDivision($name);
+		
+		foreach($temp as $t)
+		{
+			$spot = array();
+			
+			$spot = array();
+			//print_r($t);
+			$spot['name'] = $t['name'];
+			$spot['id'] = $t['id'];
+			
+			$location = $this->spotModel->getLocationInfo($t['id']);
+			$spot['location'] = $location;
+			$spot['howToGo'] = $t['howToGo'];
+			$spot['security'] = $t['security'];
+			$spot['estimatedCost'] = $t['estimatedCost'];
+			$spot['food'] = $t['food'];
+			$spot['policeContact'] = $t['policeContact'];
+			$spot['fireContact'] = $t['fireContact'];
+			
+			//$spot['images'] = $this->spotModel->getImage($t['id']);
+			$spot['description'] = $this->spotModel->getDescription($t['id']);
+			$spot['category'] = $this->categoryModel->getCategoryName($t['id']);
+			
+			array_push($spots,$spot);
+			
+			
+			//array_push($spots,$spot);
+		}
+		$jsonData['spots'] = $spots;
+		
+		
+		echo json_encode($jsonData);
+	}
+	
 }

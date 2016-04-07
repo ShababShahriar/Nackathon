@@ -9,7 +9,7 @@ class AlertModel extends CI_Model
 	
 	public function getAlerts()
 	{
-		$sql = 'SELECT * FROM alerts WHERE seen = 0';
+		$sql = 'SELECT * FROM alert WHERE seen = 0';
 		$query = $this->db->query($sql)->result_array();
 		return $query;
 	}
