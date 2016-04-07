@@ -14,7 +14,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <form>
+                        <form method="post" action="approveNext">
                         <td></td>
                         <td>
                             <label>Update from user 1 at time ...</label>
@@ -26,7 +26,7 @@
 
                     </tr>
                     <tr>
-                        <form>
+                        <form method="post" action="approveNext">
                         <td></td>
                         <td>
                             <label>Update from user 2 at time ...</label>
@@ -38,7 +38,7 @@
                     
                     </tr>
                     <tr>
-                        <form>
+                        <form method="post" action="approveNext">
                         <td></td>
                         <td>
                             <label>Update from user 3 at time ...</label>
