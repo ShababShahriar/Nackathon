@@ -126,7 +126,7 @@ public class HotelFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        hotelSpotName.setText("Hotels Near ");
+        hotelSpotName.setText("Hotels Near Omiakhum ");
         testHotelList();
     }
 

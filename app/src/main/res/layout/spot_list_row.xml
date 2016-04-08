@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:id="@+id/imageView"
+        android:id="@+id/imgSpotList"
         android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Amiakhum"
-            android:id="@+id/textView12" />
+            android:id="@+id/lblSpotTitle" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -32,14 +32,14 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Waterfall"
-                android:id="@+id/textView13"
+                android:id="@+id/lblSpotCatagory"
                 android:layout_weight="1" />
 
             <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="?android:attr/ratingBarStyleSmall"
-                android:id="@+id/ratingBar"
+                android:id="@+id/ratingSpot"
                 android:numStars="5"
                 android:rating="3"
                 android:stepSize="1" />
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Amiakhum is a great place"
-            android:id="@+id/textView14"
+            android:id="@+id/lblSpotDesc"
             android:layout_marginTop="5dp" />
 
         <Button
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="More..."
-            android:id="@+id/button2"
+            android:id="@+id/btnSpotMore"
             android:layout_gravity="right" />
 
     </LinearLayout>

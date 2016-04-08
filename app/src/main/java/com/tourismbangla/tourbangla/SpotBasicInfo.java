@@ -112,6 +112,9 @@ public class SpotBasicInfo extends Fragment implements View.OnClickListener{
         if(v.getId() == R.id.btnSpotInfoEditDesc) {
             mListener.showDescEditHistory();
         }
+        if(v.getId() == R.id.btnSpotInfoNearby) {
+            mListener.showNearbySpotsList();
+        }
     }
 
     /**
@@ -130,6 +133,7 @@ public class SpotBasicInfo extends Fragment implements View.OnClickListener{
         public void showSpotAccomodations();
         public void showSpotReviews();
         public void showDescEditHistory();
+        public void showNearbySpotsList();
     }
 
     @Override
@@ -144,5 +148,8 @@ public class SpotBasicInfo extends Fragment implements View.OnClickListener{
 
         ImageButton editDescButton = (ImageButton)getActivity().findViewById(R.id.btnSpotInfoEditDesc);
         editDescButton.setOnClickListener(this);
+
+        ImageButton nearbySpotsListButton = (ImageButton)getActivity().findViewById(R.id.btnSpotInfoNearby);
+        nearbySpotsListButton.setOnClickListener(this);
     }
 }

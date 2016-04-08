@@ -10,11 +10,13 @@
         <activity
             android:name=".Accomodation"
             android:label="@string/app_name" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".SpotReview"
@@ -37,6 +39,10 @@
             android:label="@string/title_activity_add_review" >
         </activity>
         <activity
+            android:name=".Spotlisting"
+            android:label="Spotlisting" >
+        </activity>
+        <activity
             android:name=".SpotDetails2"
             android:label="@string/title_activity_spot_details2" >
             <intent-filter>
@@ -44,6 +50,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".UserRating"
+            android:label="@string/title_activity_user_rating" >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
     </application>
 

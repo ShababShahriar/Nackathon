@@ -122,7 +122,7 @@ public class FoodPlaceFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        hotelSpotName.setText("Food Places Near ");
+        hotelSpotName.setText("Food Places Near Omiakhum ");
         testHotelList();
     }
 

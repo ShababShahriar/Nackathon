@@ -70,6 +70,12 @@ public class SpotDetails2 extends AppCompatActivity implements SpotBasicInfo.OnF
         startActivity(intent);
     }
 
+    @Override
+    public void showNearbySpotsList() {
+        Intent intent = new Intent(SpotDetails2.this, Spotlisting.class);
+        startActivity(intent);
+    }
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> mFragmentList = new ArrayList<>();

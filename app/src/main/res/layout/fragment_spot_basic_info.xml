@@ -80,7 +80,7 @@
             android:layout_height="150dp"
             android:id="@+id/imgSpotInfoMain"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/waterfall1"
             android:layout_weight="1" />
 
         <ImageButton
